@@ -1,29 +1,32 @@
-import { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Landing from "./components/Landing";
 import WorkoutScreen from "./components/WorkoutScreen";
-import { Flex, Heading, HStack } from "@chakra-ui/react";
+import WorkoutHistory from "./components/WorkoutHistory";
+import { Flex, Heading, HStack, Button } from "@chakra-ui/react";
 import ColorModeSwitcher from "./components/ColorModeSwitcher";
 
 function App() {
-
-  const [started, setStarted] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
-      <Flex
-        justify="space-between"
-        align="center"
-        px={4}
-        py={3}
-      >
+      <Flex justify="space-between" align="center" px={4} py={3}>
         <HStack>
           <Heading size="md">🏋️WorkoutGen</Heading>
         </HStack>
-        <ColorModeSwitcher />
+        <HStack>
+          <Button size="sm" onClick={() => navigate("/")}>Home</Button>
+          <Button size="sm" onClick={() => navigate("/history")}>History</Button>
+          <ColorModeSwitcher />
+        </HStack>
       </Flex>
 
-    {!started ? <Landing onStart={() => setStarted(true)} /> : <WorkoutScreen />}
-  </>
+      <Routes>
+        <Route path="/" element={<Landing onStart={() => navigate("/workout")} />} />
+        <Route path="/workout" element={<WorkoutScreen />} />
+        <Route path="/history" element={<WorkoutHistory />} />
+      </Routes>
+    </>
   );
 }
 

@@ -1,48 +1,46 @@
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import { Box, Progress, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-const WorkoutTimer = () => {
-  const INITIAL_TIME = 60 * 5;
-  const [seconds, setSeconds] = useState(INITIAL_TIME);
-  const [isActive, setIsActive] = useState(false);
+interface Props {
+  duration: number;         
+  onComplete: () => void;
+  children: string;
+  isPaused?: boolean;
+}
+
+const WorkoutTimer = ({ children,duration, onComplete }: Props) => {
+  const [timeLeft, setTimeLeft] = useState(duration);
 
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
-    if (isActive && seconds > 0) {
-      interval = setInterval(() => {
-        setSeconds((prev) => prev - 1);
-      }, 1000);
-    } else if (seconds === 0) {
-      setIsActive(false);
-    }
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);  
+          onComplete();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
     return () => clearInterval(interval);
-  }, [isActive, seconds]);
+  }, [duration, onComplete]);
 
-  const toggleTimer = () => setIsActive(!isActive);
-  const resetTimer = () => {
-    setIsActive(false);
-    setSeconds(INITIAL_TIME);
+  const formatTime = (seconds: number) => {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    return `${min}:${sec < 10 ? "0" : ""}${sec}`;
   };
 
-  const formatTime = (secs: number) => {
-    const mins = Math.floor(secs / 60);
-    const secsLeft = secs % 60;
-    return `${String(mins).padStart(2, "0")}:${String(secsLeft).padStart(2, "0")}`;
-  };
+  const progress = (timeLeft / duration) * 100;
 
+  
   return (
-    <Box textAlign="center" mt={6}>
-      <Text fontSize="2xl" fontWeight="bold">
-        ⏳ {formatTime(seconds)}
+    <Box mt={4}>
+      <Text fontSize="lg" fontWeight="bold" textAlign="center" mb={2}>
+        ⏱️ {children}: {formatTime(timeLeft)}
       </Text>
-      <HStack justify="center" mt={2}>
-        <Button size="sm" onClick={toggleTimer} colorScheme={isActive ? "red" : "green"} isDisabled={seconds === 0}>
-          {isActive ? "Pause" : "Start"}
-        </Button>
-        <Button size="sm" onClick={resetTimer} variant="outline">
-          Reset
-        </Button>
-      </HStack>
+      <Progress value={progress} size="sm" colorScheme="teal" borderRadius="full" />
     </Box>
   );
 };

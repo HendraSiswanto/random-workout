@@ -3,7 +3,6 @@ import { useState } from "react";
 import { exercises, type Exercise } from '../data/exercise';
 import AsidePanel from "../components/AsidePanel";
 import WorkoutDisplay from "../components/WorkoutDisplay";
-import WorkoutTimer from "../components/WorkoutTimer";
 import { programIdeas } from "../data/programideas";
 
 const WorkoutScreen = () => {
@@ -20,9 +19,8 @@ const WorkoutScreen = () => {
     <Flex h="100vh" p={6} gap={6}>
       <Box>
         <AsidePanel programIdeas={programIdeas} onSelect={handleSelectProgram} />
-        {selectedProgram && <WorkoutTimer />}
       </Box>
-
+                            
       <WorkoutDisplay program={selectedProgram} exercises={workout} />
     </Flex>
   );

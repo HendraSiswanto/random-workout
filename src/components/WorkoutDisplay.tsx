@@ -1,7 +1,6 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading,Text } from "@chakra-ui/react";
 import WorkoutCard from "../components/WorkoutCard";
 import type { Exercise } from "../data/exercise";
-
 
 interface Props {
   program: string | null;
@@ -13,11 +12,15 @@ const WorkoutDisplay = ({ program, exercises }: Props) => {
     <Box mt={3} flex="1">
       {program ? (
         <WorkoutCard program={program} exercises={exercises} />
-      
       ) : (
-        <Text fontSize="lg" color="gray.500">
-          👈 Choose a program to get started
-        </Text>
+        <>
+          <Heading size="md" mb={4} textAlign="center" mt={7}>
+            🚀 Pick a Program & Let’s Go!
+          </Heading>
+          <Text fontSize="sm" color="gray.500" textAlign="center" mb={2} marginLeft={1}>
+            Choose what type of workout you want today
+          </Text>
+        </>
       )}
     </Box>
   );

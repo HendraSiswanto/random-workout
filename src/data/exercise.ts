@@ -9,7 +9,7 @@ export interface Exercise {
 export const exercises: Exercise[] = [
   { name: "Push-ups", muscleGroup: "Chest", sets: 3, reps: 12 },
   { name: "Squats", muscleGroup: "Legs", sets: 4, reps: 10 },
-  { name: "Plank", muscleGroup: "Core", sets: 3, reps: 30 }, // seconds
+  { name: "Plank", muscleGroup: "Core", sets: 3, reps: 30 }, 
   { name: "Jumping Jacks", muscleGroup: "Full Body", sets: 3, reps: 20 },
   { name: "Lunges", muscleGroup: "Legs", sets: 3, reps: 12 },
   { name: "Burpees", muscleGroup: "Full Body", sets: 3, reps: 15 },

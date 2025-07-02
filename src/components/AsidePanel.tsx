@@ -28,7 +28,7 @@ const AsidePanel = ({ programIdeas, onSelect }: Props) => {
 
   return (
     
-    <Box w="250px" p={4} borderRadius="lg">
+    <Box w="250px" p={4} borderRadius="lg" mt={6}>
       <Heading size="sm" mb={4} textAlign='center'>
         Choose Your Flow
       </Heading>

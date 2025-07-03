@@ -9,7 +9,7 @@ interface Props {
 
 const WorkoutDisplay = ({ program, exercises }: Props) => {
   return (
-    <Box mt={3} flex="1">
+    <Box mt={3} flex="!">
       {program ? (
         <WorkoutCard program={program} exercises={exercises} />
       ) : (

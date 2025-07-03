@@ -8,10 +8,10 @@ const WorkoutHistory = () => {
   if (history.length === 0) {
     return (
       <Box p={6}>
-        <Heading size="md" mb={4}>
+        <Heading textAlign='center' size="md" mb={4}>
           Workout History
         </Heading>
-        <Text>No workouts recorded yet.</Text>
+        <Text textAlign='center'>No workouts recorded yet.</Text>
       </Box>
     );
   }

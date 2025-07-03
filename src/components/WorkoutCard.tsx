@@ -101,16 +101,18 @@ const WorkoutCard = ({ program, exercises }: Props) => {
 
   return (
     <MotionBox
-      p={6}
+      p={[4, 6]}
       borderRadius="lg"
       boxShadow="md"
-      w="full"
+      w="100%"
+      maxW="600px"
+      mx="auto"
       mt="0.5"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Heading size="md" mb={4}>
+      <Heading size="md" mb={4} textAlign="center">
         Program: {program.toUpperCase()}
       </Heading>
 

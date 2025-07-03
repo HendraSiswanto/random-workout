@@ -1,6 +1,6 @@
 import { Flex, Box } from "@chakra-ui/react";
 import { useState } from "react";
-import { exercises, type Exercise } from '../data/exercise';
+import { exercises, type Exercise } from "../data/exercise";
 import AsidePanel from "../components/AsidePanel";
 import WorkoutDisplay from "../components/WorkoutDisplay";
 import { programIdeas } from "../data/programideas";
@@ -16,12 +16,24 @@ const WorkoutScreen = () => {
   };
 
   return (
-    <Flex h="100vh" p={6} gap={6}>
-      <Box>
-        <AsidePanel programIdeas={programIdeas} onSelect={handleSelectProgram} />
+    <Flex
+      direction={["column", "row"]}
+      p={[4, 6]}
+      gap={[4, 6]}
+      align="stretch"
+      h="auto"
+      minH="100vh"
+    >
+      <Box w={["100%", "250px"]} mb={[4, 0]}>
+        <AsidePanel
+          programIdeas={programIdeas}
+          onSelect={handleSelectProgram}
+        />
       </Box>
-                            
-      <WorkoutDisplay program={selectedProgram} exercises={workout} />
+
+      <Box flex="1">  
+        <WorkoutDisplay program={selectedProgram} exercises={workout} />
+      </Box>
     </Flex>
   );
 };

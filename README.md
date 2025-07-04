@@ -38,9 +38,17 @@ npm run dev
 ```
 
 ## 📁 Project Structure
+```bash
+public/                  # Static files (e.g. favicon, index.html)
+src/
+├── components/          # All reusable UI & logic components
+├── data/                # Exercise and program data
+├── utils/               # Helper functions (e.g., shuffleArray)
+├── theme.ts             # Custom Chakra UI theme configuration
+├── App.tsx              # Routing and layout logic
+├── main.tsx             # App entry point
 
-<pre> ```text public/ # Static files (e.g. favicon, index.html) src/ ├── components/ # All reusable UI & logic components ├── data/ # Exercise and program data ├── utils/ # Helper functions (e.g., shuffleArray) ├── theme.ts # Custom Chakra UI theme configuration ├── App.tsx # Routing and layout logic ├── main.tsx # App entry point ``` </pre>
-
+```
 
 ## 👨‍💻 Author
 

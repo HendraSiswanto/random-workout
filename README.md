@@ -1,6 +1,6 @@
 # 🏋️ WorkoutGen
 
-[![Deploy with Vercel](https://img.shields.io/badge/Deployed-Vercel-000?logo=vercel&logoColor=white)](https://workoutgen.vercel.app) 
+[![Deploy with Vercel](https://img.shields.io/badge/Deployed-Vercel-000?logo=vercel&logoColor=white)](https://workoutgen.vercel.app)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Made with React](https://img.shields.io/badge/Made%20with-React-blue.svg)
 
@@ -51,5 +51,6 @@ Hendra Siswanto
 
 📄 License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
+```

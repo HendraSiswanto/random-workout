@@ -25,6 +25,8 @@ A fun and interactive **Random Workout Generator** built with **React + Chakra U
 
 ![WorkoutGen Preview](public/thumbnail.png)
 
+---
+
 ## 🚀 Getting Started
 
 ### 📦 Installation
@@ -32,6 +34,8 @@ A fun and interactive **Random Workout Generator** built with **React + Chakra U
 ```bash
 npm install
 npm run dev
+
+```
 
 🗂 Project Structure
 

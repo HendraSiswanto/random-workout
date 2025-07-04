@@ -1,54 +1,55 @@
-# React + TypeScript + Vite
+# 🏋️ WorkoutGen
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Deploy with Vercel](https://img.shields.io/badge/Deployed-Vercel-000?logo=vercel&logoColor=white)](https://workoutgen.vercel.app) 
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Made with React](https://img.shields.io/badge/Made%20with-React-blue.svg)
 
-Currently, two official plugins are available:
+A fun and interactive **Random Workout Generator** built with **React + Chakra UI**. Choose your workout flow, get randomized exercises, follow timers, rest between sets, and track your workout history. Perfect for fitness lovers who want quick inspiration on-the-go!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🎲 Random workout generation
+- ⏱️ Countdown timers (Work + Rest)
+- ✅ Checklist for each done workout
+- 💾 Save progress using localStorage
+- 🌘 Dark/Light mode support
+- 📱 Responsive layout (Mobile-first)
+- 🕓 History with timestamps
+- 🔁 Restart workout flow anytime
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🖼 Preview
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+![WorkoutGen Preview](public/thumbnail.png)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 🚀 Getting Started
+
+### 📦 Installation
+
+```bash
+npm install
+npm run dev
+
+🗂 Project Structure
+
+public/                  # Static files (e.g. favicon, index.html)
+src/
+├── components/          # All reusable UI & logic components
+├── data/                # Exercise and program data
+├── utils/               # Helper functions (e.g., shuffleArray)
+├── theme.ts             # Custom Chakra UI theme configuration
+├── App.tsx              # Routing and layout logic
+├── main.tsx             # App entry point
+
+
+👨‍💻 Author
+Hendra Siswanto
+🔗 GitHub: https://github.com/HendraSiswanto
+
+📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
+

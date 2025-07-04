@@ -18,7 +18,7 @@ const WorkoutHistory = () => {
 
   return (
     <Box p={6}>
-      <Heading size="md" mb={6}>
+      <Heading textAlign="center" size="md" mb={6}>
         🏋️ Workout History
       </Heading>
       <Button

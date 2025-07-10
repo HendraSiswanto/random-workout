@@ -1,4 +1,4 @@
-import { Box, Heading, Stack, Text, Divider, Button } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text, Divider, Button, Flex } from "@chakra-ui/react";
 import { getWorkoutHistory } from "../utils/workoutStorage";
 import { clearWorkoutHistory } from "../utils/workoutStorage";
 
@@ -18,20 +18,23 @@ const WorkoutHistory = () => {
 
   return (
     <Box p={6}>
-      <Heading textAlign="center" size="md" mb={6}>
-        🏋️ Workout History
-      </Heading>
-      <Button
-        size="sm"
-        colorScheme="red"
-        onClick={() => {
-          clearWorkoutHistory();
-          window.location.reload();
-        }}
-        mb={4}
-      >
-        🗑 Clear History
-      </Button>
+      <Flex justify='space-between'>
+        
+        <Heading textAlign="center" size="md" mb={6}>
+          🏋️ Workout History
+        </Heading>
+        <Button
+          size="sm"
+          colorScheme="red"
+          onClick={() => {
+            clearWorkoutHistory();
+            window.location.reload();
+          }}
+          mb={4}
+        >
+          🗑 Clear History
+        </Button>
+      </Flex>
       <Stack spacing={6}>
         {history.map((entry, index) => (
           <Box key={index}>

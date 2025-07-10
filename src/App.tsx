@@ -1,7 +1,12 @@
+import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { auth } from "./firebase";
+
 import Landing from "./components/Landing";
 import WorkoutScreen from "./components/WorkoutScreen";
 import WorkoutHistory from "./components/WorkoutHistory";
+import Login from "./components/Login";
 import {
   Flex,
   Heading,
@@ -17,10 +22,21 @@ import ColorModeSwitcher from "./components/ColorModeSwitcher";
 function App() {
   const navigate = useNavigate();
   const borderColor = useColorModeValue("gray.200", "gray.700");
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, setUser);
+    return unsub;
+  }, []);
+
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
+  if (!user) return <Login onLogin={() => navigate("/")} />;
 
   return (
     <Box minH="100vh">
-
       <Box
         position="relative"
         borderBottom="1px solid"
@@ -28,7 +44,6 @@ function App() {
         px={4}
         py={3}
       >
-  
         <Flex align="center" justify="space-between" w="100%">
           <HStack spacing={2}>
             <Text fontSize="xl">🏋️</Text>
@@ -37,16 +52,13 @@ function App() {
 
           <Box position="absolute" top={3} right={4}>
             <ColorModeSwitcher />
+            <Button size="sm" ml={4} onClick={handleLogout}>
+              Logout
+            </Button>
           </Box>
         </Flex>
 
-        <Stack
-          direction="row"
-          spacing={4}
-          mt={3}
-          justify="center"
-          w="full"
-        >
+        <Stack direction="row" spacing={4} mt={3} justify="center" w="full">
           <Button size="sm" onClick={() => navigate("/")}>
             Home
           </Button>

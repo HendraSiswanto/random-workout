@@ -18,6 +18,8 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+const MotionBox = motion(Box);
 
 interface LoginProps {
   onLogin: () => void;
@@ -64,7 +66,12 @@ export default function Login({ onLogin }: LoginProps) {
   return (
     <Flex height="100vh" align="center" justify="center">
       <Container maxW="sm" p={6} boxShadow="lg" borderRadius="md">
-        <Box textAlign="center">
+        <MotionBox
+          textAlign="center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <Heading>{isRegister ? "Register" : "Login"}</Heading>
           <form onSubmit={handleEmailAuth}>
             <VStack spacing={1} mt={4}>
@@ -98,7 +105,7 @@ export default function Login({ onLogin }: LoginProps) {
               <Button
                 onClick={handleGoogleLogin}
                 leftIcon={
-                  <Box boxShadow="md" borderRadius='full'>
+                  <Box boxShadow="md" borderRadius="full">
                     <FcGoogle size="24px" />
                   </Box>
                 }
@@ -120,7 +127,7 @@ export default function Login({ onLogin }: LoginProps) {
               {isRegister ? "Login" : "Register"}
             </Button>
           </Text>
-        </Box>
+        </MotionBox>
       </Container>
     </Flex>
   );

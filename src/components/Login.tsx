@@ -56,6 +56,10 @@ export default function Login({ onLogin }: LoginProps) {
 
   const handleGoogleLogin = async () => {
     try {
+      googleProvider.setCustomParameters({
+        prompt: "select_account", 
+      });
+
       await signInWithPopup(auth, googleProvider);
       onLogin();
     } catch (err: any) {

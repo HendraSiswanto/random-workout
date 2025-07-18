@@ -46,7 +46,13 @@ export default function Login({ onLogin }: LoginProps) {
     try {
       if (isRegister) {
         await createUserWithEmailAndPassword(auth, email, password);
-        alert("Registered!");
+        toast({
+          title: "Registered!",
+          description: "Successfully registered the Email.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         onLogin();

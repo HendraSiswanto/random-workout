@@ -17,9 +17,10 @@ import {
   Heading,
   Input,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 interface LoginProps {
   onLogin: () => void;
@@ -31,6 +32,7 @@ export default function Login({ onLogin }: LoginProps) {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const toast = useToast();
 
   const handleEmailAuth = async (e: FormEvent) => {
     e.preventDefault();
@@ -48,9 +50,58 @@ export default function Login({ onLogin }: LoginProps) {
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         onLogin();
+        toast({
+          title: "Logged in",
+          description: "Successfully logged in with Email.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       }
     } catch (err: any) {
-      alert(err.message);
+      const errorCode = err.code;
+      if (errorCode === "auth/invalid-credential") {
+        toast({
+          title: "Login failed",
+          description: "Email or password is incorrect.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else if (errorCode === "auth/email-already-in-use") {
+        toast({
+          title: "Email already used",
+          description:
+            "This email is already registered. Please log in instead.",
+          status: "warning",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else if (errorCode === "auth/invalid-email") {
+        toast({
+          title: "Invalid email",
+          description: "Please enter a valid email address.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else if (errorCode === "auth/weak-password") {
+        toast({
+          title: "Weak password",
+          description: "Password should be at least 6 characters.",
+          status: "warning",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Authentication error",
+          description: err.message,
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
     }
   };
 
@@ -58,8 +109,50 @@ export default function Login({ onLogin }: LoginProps) {
     try {
       await signInWithPopup(auth, googleProvider);
       onLogin();
+      toast({
+        title: "Logged in",
+        description: "Successfully logged in with Google.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     } catch (err: any) {
-      alert(err.message);
+      const code = err.code;
+
+      if (code === "auth/popup-closed-by-user") {
+        toast({
+          title: "Login canceled",
+          description: "You closed the Google login popup.",
+          status: "warning",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else if (code === "auth/unauthorized-domain") {
+        toast({
+          title: "Unauthorized domain",
+          description:
+            "Check Firebase Authentication settings for allowed domains.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else if (code === "auth/account-exists-with-different-credential") {
+        toast({
+          title: "Account conflict",
+          description: "This email is already registered with another method.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Login failed",
+          description: err.message,
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+        });
+      }
     }
   };
 

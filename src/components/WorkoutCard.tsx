@@ -7,7 +7,7 @@ import WorkoutChecklist from "./WorkoutChecklist";
 import WorkoutControls from "./WorkoutControls";
 import { saveWorkoutToLocalStorage } from "../utils/workoutStorage";
 import { motion } from "framer-motion";
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 interface Props {
   program: string | null;

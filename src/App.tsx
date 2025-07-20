@@ -44,18 +44,24 @@ function App() {
         px={4}
         py={3}
       >
-        <Flex align="center" justify="space-between" w="100%">
+        <Flex
+          align="center"
+          justify="space-between"
+          w="100%"
+          px={{ base: 2, sm: 4 }}
+          py={2}
+        >
           <HStack spacing={2}>
             <Text fontSize="xl">🏋️</Text>
             <Heading size="md">WorkoutGen</Heading>
           </HStack>
 
-          <Box position="absolute" top={3} right={4}>
+          <HStack spacing={2}>
             <ColorModeSwitcher />
-            <Button size="sm" ml={4} onClick={handleLogout}>
+            <Button size="sm" onClick={handleLogout}>
               Logout
             </Button>
-          </Box>
+          </HStack>
         </Flex>
 
         <Stack direction="row" spacing={4} mt={3} justify="center" w="full">

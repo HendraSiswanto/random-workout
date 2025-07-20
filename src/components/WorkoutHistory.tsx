@@ -1,34 +1,62 @@
-import { Box, Heading, Stack, Text, Divider, Button, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Stack,
+  Text,
+  Divider,
+  Button,
+  Flex,
+} from "@chakra-ui/react";
 import { getWorkoutHistory } from "../utils/workoutStorage";
 import { clearWorkoutHistory } from "../utils/workoutStorage";
+import { useEffect, useState } from "react";
+import { Spinner } from "@chakra-ui/react";
+import type { WorkoutHistoryEntry } from "../utils/workoutStorage";
 
 const WorkoutHistory = () => {
-  const history = getWorkoutHistory();
+  const [history, setHistory] = useState<WorkoutHistoryEntry[]>([]);
+  const [isClearing, setIsClearing] = useState(false);
+
+  useEffect(() => {
+  const data = getWorkoutHistory();
+  setHistory(data);
+  }, []);
 
   if (history.length === 0) {
     return (
       <Box p={6}>
-        <Heading textAlign='center' size="md" mb={4}>
+        <Heading textAlign="center" size="md" mb={4}>
           Workout History
         </Heading>
-        <Text textAlign='center'>No workouts recorded yet.</Text>
+        <Text textAlign="center">No workouts recorded yet.</Text>
       </Box>
     );
   }
 
+  if (isClearing) {
+  return (
+    <Box p={6} textAlign="center">
+      <Spinner size="md" />
+      <Text mt={4}>Clearing history...</Text>
+    </Box>
+  );
+  }
+
   return (
     <Box p={6}>
-      <Flex justify='space-between'>
-        
+      <Flex justify="space-between">
         <Heading textAlign="center" size="md" mb={6}>
           🏋️ Workout History
         </Heading>
         <Button
           size="sm"
           colorScheme="red"
-          onClick={() => {
+          onClick={async() => {
+            setIsClearing(true);
+            await new Promise((res) => setTimeout(res, 500));
             clearWorkoutHistory();
-            window.location.reload();
+            setHistory([]);
+            setIsClearing(false);
           }}
           mb={4}
         >

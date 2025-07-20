@@ -2,29 +2,32 @@ import { Box, Progress, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 interface Props {
-  duration: number;         
+  duration: number;
   onComplete: () => void;
   children: string;
   isPaused?: boolean;
 }
 
-const WorkoutTimer = ({ children,duration, onComplete }: Props) => {
+const WorkoutTimer = ({ children, duration, onComplete, isPaused }: Props) => {
   const [timeLeft, setTimeLeft] = useState(duration);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(interval);  
-          onComplete();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+  if (isPaused) return;
+
+  const interval = setInterval(() => {
+    setTimeLeft((prev) => {
+      if (prev <= 1) {
+        clearInterval(interval);
+        onComplete();
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
+
 
     return () => clearInterval(interval);
-  }, [duration, onComplete]);
+  }, [duration, onComplete,isPaused ]);
 
   const formatTime = (seconds: number) => {
     const min = Math.floor(seconds / 60);
@@ -34,13 +37,17 @@ const WorkoutTimer = ({ children,duration, onComplete }: Props) => {
 
   const progress = (timeLeft / duration) * 100;
 
-  
   return (
     <Box mt={4}>
       <Text fontSize="lg" fontWeight="bold" textAlign="center" mb={2}>
         ⏱️ {children}: {formatTime(timeLeft)}
       </Text>
-      <Progress value={progress} size="sm" colorScheme="teal" borderRadius="full" />
+      <Progress
+        value={progress}
+        size="sm"
+        colorScheme="teal"
+        borderRadius="full"
+      />
     </Box>
   );
 };

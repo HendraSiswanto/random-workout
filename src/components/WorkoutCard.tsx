@@ -34,6 +34,11 @@ const WorkoutCard = ({ program, exercises }: Props) => {
     setWorkoutComplete(false);
   }, [program]);
 
+  const handlePauseToggle = () => {
+  setIsPaused((prev) => !prev);
+};
+
+
   const playBeep = () => {
     new Audio("/beep.mp3").play();
     if (navigator.vibrate) navigator.vibrate(200);
@@ -152,7 +157,7 @@ const WorkoutCard = ({ program, exercises }: Props) => {
 
               <WorkoutControls
                 isPaused={isPaused}
-                onPauseToggle={() => setIsPaused(!isPaused)}
+                onPauseToggle={handlePauseToggle}
                 onSkip={handleSkip}
               />
             </>

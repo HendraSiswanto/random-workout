@@ -6,6 +6,7 @@ interface Props {
   onSkip: () => void;
 }
 
+
 const WorkoutControls = ({ isPaused, onPauseToggle, onSkip }: Props) => {
   return (
     <HStack mt={4} justify="center">

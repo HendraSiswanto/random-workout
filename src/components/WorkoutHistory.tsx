@@ -18,8 +18,8 @@ const WorkoutHistory = () => {
   const [isClearing, setIsClearing] = useState(false);
 
   useEffect(() => {
-  const data = getWorkoutHistory();
-  setHistory(data);
+    const data = getWorkoutHistory();
+    setHistory(data);
   }, []);
 
   if (history.length === 0) {
@@ -34,12 +34,12 @@ const WorkoutHistory = () => {
   }
 
   if (isClearing) {
-  return (
-    <Box p={6} textAlign="center">
-      <Spinner size="md" />
-      <Text mt={4}>Clearing history...</Text>
-    </Box>
-  );
+    return (
+      <Box p={6} textAlign="center">
+        <Spinner size="md" />
+        <Text mt={4}>Clearing history...</Text>
+      </Box>
+    );
   }
 
   return (
@@ -51,7 +51,7 @@ const WorkoutHistory = () => {
         <Button
           size="sm"
           colorScheme="red"
-          onClick={async() => {
+          onClick={async () => {
             setIsClearing(true);
             await new Promise((res) => setTimeout(res, 500));
             clearWorkoutHistory();
@@ -60,7 +60,8 @@ const WorkoutHistory = () => {
           }}
           mb={4}
         >
-          🗑 Clear History
+          <Box display={{ base: "inline", sm: "none" }}>🗑</Box>
+          <Box display={{ base: "none", md: "inline" }}>🗑 Clear History</Box>
         </Button>
       </Flex>
       <Stack spacing={6}>
